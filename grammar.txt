@@ -1,0 +1,26 @@
+<program> ::= ( <statement> )+
+
+<statement> ::= "make" <identifier> ":" <type> "be" <expression> "STOP"
+              | <identifier> "be" <expression> "STOP"
+              | "maybe" "(" <condition> ")" <block> "ENDMAYBE"
+              | "maybe" "(" <condition> ")" <block> "letsdothisinstead" <block> "ENDMAYBE"
+              | "keeponswimming" "(" <condition> ")" <block> "STOPSWIMMING"
+              | "SCREAM" "(" <expression> ")" "QUIET"
+
+<condition> ::= <expression> <comp_op> <expression>
+<comp_op> ::= "notalmostthesamethesame" | "tinyerthan" | "oppositeoftinyerthan"
+
+<block> ::= "{" ( <statement> )* "}"
+
+<type> ::= "number" | "string"
+
+<expression> ::= <term>
+               | <term> "+" <expression>
+
+<term> ::= <number> | <identifier> | <string>
+
+<identifier> ::= (([a-z] | [A-Z])+ ([a-z] | [A-Z] | [0-9])*)
+<number>     ::= [0-9]+
+<string>     ::= "\"" ([A-Z] | [a-z] | [0-9])* "\""
+
+
