@@ -1,5 +1,5 @@
-mod lexer;
 mod ast;
+mod lexer;
 mod parser;
 
 use crate::lexer::Lexer;
@@ -20,9 +20,9 @@ fn main() {
 
     let lexer = Lexer::new(input.to_string());
     let tokens: Vec<_> = lexer.collect();
-    
+
     let mut parser = Parser::new(tokens);
-    
+
     match parser.parse_program() {
         Ok(program) => {
             println!("{:#?}", program);
