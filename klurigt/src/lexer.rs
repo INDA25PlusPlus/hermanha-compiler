@@ -167,3 +167,24 @@ impl Iterator for Lexer {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_simple_variable_declaration() {
+        let input = "make x: number be 42 STOP".to_string();
+        let tokens: Vec<Token> = Lexer::new(input).collect();
+        
+        assert_eq!(tokens, vec![
+            Token::Let,
+            Token::Identifier("x".to_string()),
+            Token::Colon,
+            Token::TypeNumber,
+            Token::Assign,
+            Token::Number("42".to_string()),
+            Token::Semicolon,
+        ]);
+    }
+}
