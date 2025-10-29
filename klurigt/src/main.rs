@@ -1,21 +1,34 @@
 mod lexer;
+mod ast;
+mod parser;
+
 use crate::lexer::Lexer;
-
-
+use crate::parser::Parser;
 
 fn main() {
-    let lexer = Lexer::new("make a: number be 0 STOP
-make b: number be 1 STOP
-make depth: number be 5 STOP
-make count: number be 0 STOP
-make fib: number be 0 STOP
-keeponswimming(count tinyerthan depth){
-    fib be a+b STOP
-    a be b STOP
-    b be fib STOP
-    } STOPSWIMMING
-SCREAM(fib)QUIET".to_string());
-    for token in lexer {
-        println!("{:?}", token);
+    let input = "make a: number be 0 STOP
+        make b: number be 1 STOP
+        make depth: number be 5 STOP
+        make count: number be 0 STOP
+        make fib: number be 0 STOP
+        keeponswimming(count tinyerthan depth){
+            fib be a+b STOP
+            a be b STOP
+            b be fib STOP
+            } STOPSWIMMING
+        SCREAM(fib)QUIET";
+
+    let lexer = Lexer::new(input.to_string());
+    let tokens: Vec<_> = lexer.collect();
+    
+    let mut parser = Parser::new(tokens);
+    
+    match parser.parse_program() {
+        Ok(program) => {
+            println!("{:#?}", program);
+        }
+        Err(e) => {
+            eprintln!("Parse error: {}", e);
+        }
     }
 }
