@@ -1,6 +1,7 @@
 mod ast;
 mod lexer;
 mod parser;
+mod codegen;
 
 use crate::lexer::Lexer;
 use crate::parser::Parser;
@@ -15,6 +16,7 @@ fn main() {
             fib be a+b STOP
             a be b STOP
             b be fib STOP
+            count be count +1 STOP
             } STOPSWIMMING
         SCREAM(fib)QUIET";
 
@@ -25,7 +27,7 @@ fn main() {
 
     match parser.parse_program() {
         Ok(program) => {
-            println!("{:#?}", program);
+            println!("{}", codegen::generate_rust(&program));
         }
         Err(e) => {
             eprintln!("Parse error: {}", e);
