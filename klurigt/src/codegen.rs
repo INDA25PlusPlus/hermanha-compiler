@@ -99,8 +99,10 @@ fn emit_statement_rs(stmt: &Statement) -> String {
 
 pub fn generate_rust(program: &Program) -> String {
     let mut out = String::new();
+    out.push_str("fn main() {\n");
     for stmt in &program.statements {
         out.push_str(&emit_statement_rs(stmt));
     }
+    out.push_str("}\n");
     out
 }
