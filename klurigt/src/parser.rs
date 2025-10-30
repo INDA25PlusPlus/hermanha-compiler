@@ -71,9 +71,9 @@ impl Parser {
         if let Some(Token::Plus) = self.current_token() {
             self.advance();
             let right = self.parse_expression()?;
-            Ok(Expression::BinaryOp {
+            Ok(Expression::ArithmeticOp {
                 left: Box::new(left),
-                op: BinaryOp::Add,
+                op: ArithmeticOp::Add,
                 right: Box::new(right),
             })
         } else {

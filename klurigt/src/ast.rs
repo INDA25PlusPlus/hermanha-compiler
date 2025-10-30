@@ -12,7 +12,7 @@ pub enum CompOp {
 }
 
 #[derive(Debug, Clone, PartialEq)]
-pub enum BinaryOp {
+pub enum ArithmeticOp {
     Add,
 }
 
@@ -21,9 +21,9 @@ pub enum Expression {
     Number(i64),
     Identifier(String),
     StringLiteral(String),
-    BinaryOp {
+    ArithmeticOp {
         left: Box<Expression>,
-        op: BinaryOp,
+        op: ArithmeticOp,
         right: Box<Expression>,
     },
 }
